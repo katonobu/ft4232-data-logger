@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import {HwReset, HwAccessInit, HwAccess} from './HwAccessInit'
+import {HwAccessInit, HwAccess} from './HwAccessInit'
 
 import SlideSwitch from './components/SlideSwitch'
 import CheckIndicator from './components/CheckIndicator'
   
 function App() {
   const [initSuccess, setInitSuccess] = useState<boolean>(false)
-  const [enablePortStt, setEnablePortStt] = useState<boolean>(false)
-  const [sleepPortStt, setSleepPortStt] = useState<boolean>(false)
   const [disable, setDisable] = useState<boolean>(true)
   const [hwAccess, setHwAccess] = useState<HwAccess | null>(null)
   const [dispDebug, setDispDebut] = useState<boolean>(true)
@@ -18,7 +16,7 @@ function App() {
     setHwAccess(new HwAccess())
   },[])
 
-  const resetCtrlDisable = !(initSuccess && !disable)
+  const targetCtrlDisable = !(initSuccess && !disable)
   return (
     <div
       style={{
@@ -41,18 +39,6 @@ function App() {
           setDisable={setDisable}
           initSuccess={initSuccess}
           setInitSuccess={setInitSuccess}
-          setEnablePortStt={setEnablePortStt}
-          setSleepPortStt={setSleepPortStt}
-        />
-        <HwReset
-          setErrMsg={setErrMsg}
-          hwAccess={hwAccess}
-          disable={resetCtrlDisable}
-          setDisable={setDisable}
-          enablePortStt={enablePortStt}
-          setEnablePortStt={setEnablePortStt}
-          sleepPortStt={sleepPortStt}
-          setSleepPortStt={setSleepPortStt}
         />
       </div>
       <div
@@ -92,22 +78,6 @@ function App() {
               checkedColor='blue'
               unCheckedBackgroundColor='rgb(208,208,208)'
             />
-            <CheckIndicator
-              checked={enablePortStt}
-              checkedStr={"ResetStatus"}
-              attackDurationMs={10}
-              releaseDurationMs={10}
-              checkedColor='blue'
-              unCheckedColor='rgb(208,208,208)'
-            />
-            <CheckIndicator
-              checked={sleepPortStt}
-              checkedStr={"SleepStatus"}
-              attackDurationMs={10}
-              releaseDurationMs={10}
-              checkedColor='blue'
-              unCheckedColor='rgb(208,208,208)'
-            />
             <SlideSwitch
               id={'disable'}
               checked={disable}
@@ -119,8 +89,8 @@ function App() {
               unCheckedBackgroundColor='rgb(208,208,208)'
             />
             <CheckIndicator
-              checked={resetCtrlDisable}
-              checkedStr={"ResetCtrlDisable"}
+              checked={targetCtrlDisable}
+              checkedStr={"TargetCtrlDisable"}
               attackDurationMs={10}
               releaseDurationMs={10}
               checkedColor='blue'
