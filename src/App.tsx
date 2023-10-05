@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import {HwReset, HwAccessInit, HwAccess} from './HwReset'
+import {HwReset, HwAccessInit, HwAccess} from './HwAccessInit'
 
 import SlideSwitch from './components/SlideSwitch'
 import CheckIndicator from './components/CheckIndicator'
