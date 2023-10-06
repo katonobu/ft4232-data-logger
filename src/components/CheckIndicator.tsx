@@ -65,7 +65,7 @@ const CheckIndicator = (props: {
                         checkedStr
                         :
                         unCheckedStr
-                }</span>
+            }</span>
         </div>
     )
 }

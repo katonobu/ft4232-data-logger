@@ -1,33 +1,7 @@
 import { useState } from 'react'
+import { HwAccess } from '../control/HwAccess'
 
-export class HwAccess {
-    constructor() {
-    }
-    async init(
-        // @ts-ignore
-        option: any
-    ): Promise<boolean> {
-        console.log("init()")
-        await new Promise<void>((resolve) => setTimeout(resolve, 1500))
-        return true
-    }
-    async setResetPort(stt: boolean): Promise<boolean> {
-        console.log(`setResetPort(${stt})`)
-        await new Promise<void>((resolve) => setTimeout(() => resolve(), 10))
-        return true
-    }
-    async setSleepPort(stt: boolean): Promise<boolean> {
-        console.log(`setSleepPort(${stt})`)
-        await new Promise<void>((resolve) => setTimeout(() => resolve(), 10))
-        return true
-    }
-    async finalize(): Promise<void> {
-        console.log(`finalize()`)
-        await new Promise<void>((resolve) => setTimeout(resolve, 10))
-    }
-}
-
-export const HwAccessInit = (props: {
+export const HwAccessInitButton = (props: {
     setErrMsg:(msgs:string[])=>void,
     hwAccess: HwAccess | null,
     disable: boolean,
@@ -66,9 +40,6 @@ export const HwAccessInit = (props: {
                             const result = await hwAccess.init(option)
                             setInitSuccess(result)
                             setDisable(!result)
-                            if (result) {
-                                // ここで空行打ってレスポンスチェック
-                            }
                         } catch(e) {
                             setInitSuccess(false)
                             setDisable(true)
