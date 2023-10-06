@@ -12,9 +12,15 @@ import {ErrorMessagePre} from './components/ErrorMsg'
 import { DispDebugSelect } from './components/DispDebugSelect'
 
 import {useNmeaRxSentences, useNmeaSingleLineAnalyseSentence} from './hooks/useNmea'
-import {NmeaSentencesPre, ZdaView, RmcView} from './components/Nmea'
+import {NmeaSentencesPre, ZdaView} from './components/Nmea'
 import {ResetInitButton, InitButton} from './components/ResetInitButton'
 
+import Leaflet from 'leaflet'
+import 'leaflet/dist/leaflet.css';
+import {PositionMap} from './components/PositionMap'
+
+Leaflet.Icon.Default.imagePath =
+  '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/'
 
 const sysSttColorTbl:Record<SysSttStrType,string> = {
   "IDLE":"gray",// スタンバイ状態：電源 ON 直後
@@ -126,9 +132,11 @@ function App() {
             <SysSttIndicator creHandler={creHandler} colorTbl={sysSttColorTbl}></SysSttIndicator>
             <GnssSttDotsEnum creHandler={creHandler}></GnssSttDotsEnum>
             <ZdaView sentenceInfos={sentenceInfos}></ZdaView>
-            <RmcView sentenceInfos={sentenceInfos}></RmcView>
         </div>
-       
+
+        <div>
+          <PositionMap sentenceInfos={sentenceInfos}/>
+        </div>
       </div>
 
       <div
